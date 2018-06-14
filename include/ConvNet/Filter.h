@@ -13,8 +13,9 @@ class Filter
         size_t get_depth();
 
         std::vector<std::vector<std::vector<double>>> weights;
+        double bias;
 
-        double run(std::vector<std::vector<std::vector<double>>> input, size_t x_offset, size_t y_offset);
+        double convolve(std::vector<std::vector<std::vector<double>>> input, size_t x_offset, size_t y_offset);
     private:
         size_t width;
         size_t height;

@@ -30,15 +30,15 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::feed_forward(std::vecto
 
         for (size_t i = 0; i < filter_count; i++)
         {
-            output_vector[i].resize((input[i].size() - filter_height) / stride);
+            output_vector[i].resize((input[0].size() - filter_height) / stride + 1);
 
-            for (size_t j = 0; j < (input[i].size() - filter_height) / stride; j++)
+            for (size_t j = 0; j < (input[0].size() - filter_height) / stride + 1; j++)
             {
-                output_vector[i][j].resize((input[i][j].size() - filter_width) / stride);
+                output_vector[i][j].resize((input[0][0].size() - filter_width) / stride + 1);
 
-                for (size_t k = 0; k < (input[i][j].size() - filter_width) / stride; k++)
+                for (size_t k = 0; k < (input[0][0].size() - filter_width) / stride + 1; k++)
                 {
-                    output_vector[i][j][k] = std::max(0.0, filters[i]->run(input, k, j));
+                    output_vector[i][j][k] = std::max(0.0, filters[i]->convolve(input, k, j));
                 }
             }
         }

@@ -25,6 +25,8 @@ Filter::Filter(size_t filter_width, size_t filter_height, size_t filter_depth)
             }
         }
     }
+
+    bias = random_double(-1.0, 1.0);
 }
 
 size_t Filter::get_width()
@@ -42,7 +44,7 @@ size_t Filter::get_depth()
     return depth;
 }
 
-double Filter::run(std::vector<std::vector<std::vector<double>>> input, size_t x_offset, size_t y_offset)
+double Filter::convolve(std::vector<std::vector<std::vector<double>>> input, size_t x_offset, size_t y_offset)
 {
     double output_value = 0.0;
 
@@ -57,5 +59,5 @@ double Filter::run(std::vector<std::vector<std::vector<double>>> input, size_t x
         }
     }
 
-    return output_value;
+    return output_value + bias;
 }
