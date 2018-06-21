@@ -1,5 +1,6 @@
 #include <ConvNet/ConvLayer.h>
 #include <ConvNet/Filter.h>
+#include <TransferFunctions.h>
 
 #include <vector>
 
@@ -38,7 +39,7 @@ std::vector<std::vector<std::vector<double>>> ConvLayer::feed_forward(std::vecto
 
                 for (size_t k = 0; k < (input[0][0].size() - filter_width) / stride + 1; k++)
                 {
-                    output_vector[i][j][k] = std::max(0.0, filters[i]->convolve(input, k, j));
+                    output_vector[i][j][k] = tanh_function(filters[i]->convolve(input, k, j));
                 }
             }
         }

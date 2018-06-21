@@ -9,22 +9,25 @@ class Neuron
         Neuron(size_t neuron_input_count);
 
         size_t get_input_count();
+        std::vector<double> inputs;
+
+        double gradient_input;
 
         std::vector<double> input_weights;
         double bias;
 
         double get_output();
 
-        double get_gradient();
+        std::vector<double> get_gradient_outputs();
 
-        void feed_forward(std::vector<double> input);
-        void propagate_backward(std::vector<double> input, double learning_rate);
+        void feed_forward();
+        void propagate_backward(double learning_rate);
     private:
         size_t input_count;
 
         double output;
 
-        double gradient;
+        std::vector<double> gradient_outputs;
 };
 
 #endif // NEURON_H_INCLUDED
